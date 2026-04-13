@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>31 Days of Encouragement</title>
+  <style>
+    :root {
+      --bg1: #fff8fb;
+      --bg2: #ffeef5;
+      --card: rgba(255,255,255,0.9);
+      --card-strong: #ffffff;
+      --text: #402b38;
+      --muted: #7a5a69;
+      --accent: #ff7aa8;
+      --accent-dark: #e85f91;
+      --shadow: 0 12px 35px rgba(173, 86, 122, 0.16);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, #fffef9 0%, transparent 32%),
+        radial-gradient(circle at top right, #ffe3ef 0%, transparent 28%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height: 100vh;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 18px 14px 32px;
+    }
+
+    .hero {
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.82));
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 18px 16px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      right: -35px;
+      top: -35px;
+      background: rgba(255, 122, 168, 0.12);
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 14px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .avatar-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .hero-heart-image {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 24px;
+      box-shadow: 0 12px 25px rgba(232, 95, 145, 0.22);
+      border: 4px solid rgba(255,255,255,0.9);
+      background: #fff;
+    }
+
+    .heart::before {
+      top: -45px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 45px;
+      top: 0;
+    }
+
+    .avatar {
+      width: 104px;
+      height: 104px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #f7d8c7, #efc6ae);
+      position: relative;
+      box-shadow: inset 0 -6px 0 rgba(0,0,0,0.04), 0 8px 18px rgba(0,0,0,0.09);
+      overflow: hidden;
+    }
+
+    .hair {
+      position: absolute;
+      left: 8px;
+      top: 6px;
+      width: 88px;
+      height: 42px;
+      background: linear-gradient(180deg, #6b4028, #4e2f1f);
+      border-radius: 40px 40px 28px 28px;
+      box-shadow: inset 0 -6px 0 rgba(0,0,0,0.08);
+    }
+
+    .hair::after {
+      content: "";
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      width: 68px;
+      height: 18px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 50%;
+    }
+
+    .face {
+      position: absolute;
+      inset: 0;
+    }
+
+    .eye {
+      position: absolute;
+      top: 46px;
+      width: 11px;
+      height: 11px;
+      background: #5b3c2b;
+      border-radius: 50%;
+      border: 2px solid #fff;
+    }
+
+    .eye.left { left: 28px; }
+    .eye.right { right: 28px; }
+
+    .pupil {
+      position: absolute;
+      inset: 2px;
+      background: #5b3a21;
+      border-radius: 50%;
+    }
+
+    .brow {
+      position: absolute;
+      top: 38px;
+      width: 18px;
+      height: 4px;
+      background: #6b4028;
+      border-radius: 4px;
+    }
+
+    .brow.left { left: 24px; transform: rotate(-8deg); }
+    .brow.right { right: 24px; transform: rotate(8deg); }
+
+    .nose {
+      position: absolute;
+      left: 50%;
+      top: 50px;
+      width: 8px;
+      height: 16px;
+      transform: translateX(-50%);
+      border-radius: 6px;
+      background: rgba(190, 128, 97, 0.42);
+    }
+
+    .mouth {
+      position: absolute;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 12px;
+      border-bottom: 3px solid #9b586f;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .body {
+      width: 86px;
+      height: 56px;
+      background: linear-gradient(180deg, #7c8bff, #6270da);
+      border-radius: 20px 20px 14px 14px;
+      position: relative;
+      margin-top: -6px;
+      box-shadow: 0 8px 20px rgba(98, 112, 218, 0.2);
+    }
+
+    .body::before, .body::after {
+      content: "";
+      position: absolute;
+      top: 14px;
+      width: 18px;
+      height: 36px;
+      background: #7c8bff;
+      border-radius: 14px;
+    }
+
+    .body::before { left: -10px; transform: rotate(24deg); }
+    .body::after { right: -10px; transform: rotate(-24deg); }
+
+    .speech {
+      background: #fff;
+      border-radius: 18px;
+      padding: 14px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+      position: relative;
+    }
+
+    .speech::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: 24px;
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      transform: rotate(45deg);
+      border-radius: 4px;
+    }
+
+    h1 {
+      font-size: 1.55rem;
+      line-height: 1.1;
+      margin: 0 0 8px;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.45;
+    }
+
+    .calendar {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .day-card {
+      appearance: none;
+      border: 0;
+      background: var(--card);
+      border-radius: 20px;
+      min-height: 78px;
+      box-shadow: var(--shadow);
+      padding: 10px 6px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      color: var(--text);
+      cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .day-card:active {
+      transform: scale(0.97);
+    }
+
+    .day-card.opened {
+      background: linear-gradient(180deg, #fff, #ffe9f1);
+      outline: 2px solid rgba(255, 122, 168, 0.34);
+    }
+
+    .day-number {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .day-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .message-panel {
+      margin-top: 18px;
+      background: var(--card-strong);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: 18px 16px 20px;
+    }
+
+    .message-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 64px;
+      height: 36px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-dark));
+      color: #fff;
+      font-weight: 700;
+      padding: 0 14px;
+      box-shadow: 0 8px 18px rgba(232, 95, 145, 0.24);
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .message-text {
+      font-size: 1.03rem;
+      line-height: 1.65;
+      margin: 12px 0 0;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 420px) {
+      .intro {
+        grid-template-columns: 92px 1fr;
+        gap: 10px;
+      }
+
+      .avatar {
+        width: 88px;
+        height: 88px;
+      }
+
+      .body {
+        width: 72px;
+        height: 48px;
+      }
+
+      .calendar {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+      }
+
+      .day-card {
+        min-height: 70px;
+        border-radius: 18px;
+      }
+
+      h1 {
+        font-size: 1.35rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <section class="hero">
+      <div class="intro">
+        <div class="avatar-wrap">
+          <img
+            class="hero-heart-image"
+            src="https://www.cardofmich.com/wp-content/uploads/2019/10/Card-of-Mich-_-Blog-Anatomy-of-the-Heart-1135940061.jpg"
+            alt="Hands making a heart shape"
+          />
+        </div>
+
+        <div class="speech">
+          <h1>31 Days For You</h1>
+          <p class="subtitle">
+            Tap a date and I’ll bring you a message for the day — one small reminder of your strength, warmth, and how much light you carry.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="calendar" id="calendar"></section>
+
+    <section class="message-panel">
+      <div class="message-top">
+        <div class="badge" id="badge">Day 1</div>
+        <div class="hint" id="hint">Open any card for today’s note.</div>
+      </div>
+      <p class="message-text" id="messageText"></p>
+    </section>
+
+    <div class="footer-note">Made with love, encouragement, and a little bit of code.</div>
+  </div>
+
+  <script>
+    const messages = [
+"Love you Bubbas, have a great day",
+"Hope you kick ass today my Shongololo",
+"If anyone messes with you gaan ek hulle skop",
+"Have an amazing day, don't be stout",
+"Lief vir jou soos 7,000,000,000,000,000 to the power of 7000 universes",
+"Whenever you feel bad I'm just a WhatsApp message away",
+"I know you can do anything if you set your mind to it",
+"Jys so baie oulik",
+"I want our kids to have amazing lives one day.",
+"Your Non-profit organization is going to be amazing one day",
+"Even if today is tough just getting out of bed is already a massive win",
+"Be kind to yourself",
+"There is no one in the world that wants you to win more than me",
+"If I didn't say Hey today, \"Hey Baby\"",
+"What would I do without my liefiepop",
+"Love you baby <3 <3",
+"I'm always so inspired by how good you are with animals",
+"Whether it's a joke, or an I love you message, sometimes you just make my day",
+"You know how to cheer me up",
+"I want us to get stronger in faith and get closer to God together",
+"I want us to talk openly and have weekly discussions without you feeling like you're in trouble",
+"I want us to be kinder to each other",
+"Teach me how you want to be loved",
+"Cuddling with you is one of my favorite things in life",
+"I hope you get to be with me when I reach my dreams",
+"You're a wonderful person, don't let anyone tell you anything else",
+"I wish I could understand you better",
+"I wish I could be as okay with life as you seem to be",
+"You inspire me to be a better man <3",
+"You're lovely",
+"Best woman in the entire world, I mean galaxy, I mean universe"
+];
+
+    const calendar = document.getElementById('calendar');
+    const messageText = document.getElementById('messageText');
+    const badge = document.getElementById('badge');
+    const hint = document.getElementById('hint');
+
+    function openDay(day) {
+      const allCards = document.querySelectorAll('.day-card');
+      allCards.forEach(card => card.classList.remove('opened'));
+      const selected = document.querySelector(`[data-day="${day}"]`);
+      if (selected) selected.classList.add('opened');
+
+      badge.textContent = `Day ${day}`;
+      hint.textContent = "A message from me to you.";
+      messageText.textContent = messages[day - 1];
+    }
+
+    for (let day = 1; day <= 31; day++) {
+      const button = document.createElement('button');
+      button.className = 'day-card';
+      button.setAttribute('data-day', day);
+      button.setAttribute('aria-label', `Open message for day ${day}`);
+      button.innerHTML = `
+        <div class="day-number">${day}</div>
+        <div class="day-label">Open me</div>
+      `;
+      button.addEventListener('click', () => openDay(day));
+      calendar.appendChild(button);
+    }
+
+    openDay(1);
+  </script>
+</body>
+</html>
